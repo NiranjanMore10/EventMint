@@ -10,7 +10,7 @@ import profile from './profile.png'
 
 
 const EventsPage = () => {
-    let slides = ["https://autowithsid.in/wp-content/uploads/2023/06/Animal-Upcoming-Ranbir-Kapoor-Movie-2023.jpg",
+    let slides = ["https://i0.wp.com/filmyhype.com/wp-content/uploads/2021/03/animal-movie-release-date.jpg?w=1280&ssl=1",
         'https://bingeddata.s3.amazonaws.com/uploads/2022/05/Salaar-Poster-Teases-Prabhas-Kicking-Some-High-Octane-Action.jpg',
         'https://i.ytimg.com/vi/Kwmid4Ud1ao/maxresdefault.jpg'
     ]
@@ -26,6 +26,8 @@ const EventsPage = () => {
         'https://s1.ticketm.net/dam/a/7d5/97b67038-f926-4676-be88-ebf94cb5c7d5_1802151_TABLET_LANDSCAPE_LARGE_16_9.jpg'
     ]
 
+    let comingsoon=['https://i.ytimg.com/vi/CDNQFJuR3hE/maxresdefault.jpg',
+]
 
 
 
@@ -72,7 +74,7 @@ const EventsPage = () => {
 
         </nav>
 
-        <div className=" bg-white bg-opacity-5 ">
+        <div className=" bg-black bg-opacity-15 ">
             <div className=" pt-20 pl-52  ">
                 <b className="text-center pl-4 pr-4 pt-4 pb-4 rounded-full font-bold text-white bg-black border-white border-solid border-2 ">Featured Events</b>
             </div>
@@ -85,14 +87,14 @@ const EventsPage = () => {
 
         </div>
 
-        <div className=" bg-white bg-opacity-5 h-screen">
+        <div className=" bg-black bg-opacity-15 h-screen">
             <div className=" pt-24  pl-52   ">
                 <b className="text-center  pl-4 pr-8 pt-4 pb-4 rounded-full font-bold text-white bg-black border-white border-solid border-2 ">Coming Soon</b>
             </div>
             <div className="pt-16 box-border m-auto w-[90%] flex space-x-4">
-                <Sliderss slides={slides}></Sliderss>
-                <Sliderss slides={slides}></Sliderss>
-                <Sliderss slides={slides}></Sliderss>
+                <Sliderss slides={comingsoon}></Sliderss>
+                <Sliderss slides={comingsoon}></Sliderss>
+                <Sliderss slides={comingsoon}></Sliderss>
             </div>
 
 
