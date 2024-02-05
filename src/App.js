@@ -17,30 +17,29 @@ import './styles.css'
 import SiteMap from './components/map'
 import LoginPage from './components/LoginpageNew'
 import SignUpPage from './components/SignupPage'
+import AddNFTPage from './components/AddNFTpage'
 
 
 
 const App = () => {
 
   return (
-    <>
-      <NavBar />
-      <Routes>
-        <Route exact path="/" element={<Home />} />
-        <Route path="/Events" element={<Events />} />
-        <Route path="/MarketPlace" element={<Marketplace/>} />
+    // <>
+    //   <NavBar />
+    //   <Routes>
+    //     <Route exact path="/" element={<Home />} />
+    //     <Route path="/Events" element={<Events />} />
+    //     <Route path="/MarketPlace" element={<Marketplace/>} />
        
-        <Route path="/LoginpageNew" element={<LoginPage />} />
-          <Route path="/SignUpPage" element={<SignUpPage />} />
-      </Routes>
-      <Footer />
+    //     <Route path="/LoginpageNew" element={<LoginPage />} />
+    //       <Route path="/SignUpPage" element={<SignUpPage />} />
+    //   </Routes>
+    //   <Footer />
 
 
 
-    </>
-    // <SiteMap></SiteMap> 
-   
-    // <SignUpPage></SignUpPage>
+    // </>
+<AddNFTPage></AddNFTPage>
   )
 }
 

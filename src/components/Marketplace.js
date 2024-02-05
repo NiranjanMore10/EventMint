@@ -29,7 +29,7 @@ const Marketplace = () => {
         </h1>
       </div>
 
-      <main className="place-items-center grid grid-cols-4 mt-24 ">
+      <main className="place-items-center grid grid-cols-4 mt-24 mb-24 ">
         {/* Iterate over the list of NFT items */}
         {nftItems.map((item, index) => (
           <NFTItem
