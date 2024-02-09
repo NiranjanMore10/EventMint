@@ -35,6 +35,12 @@ const App = () => {
     // Your handleSubmit logic here
     console.log('Submitted data:', data);
   };
+  const [addedNFTs, setAddedNFTs] = useState([]);
+
+  const handleAddNFT = (nft) => {
+    // Add the new NFT to the existing array
+    setAddedNFTs([...addedNFTs, nft]);
+  };
 
   return (
     <>
@@ -42,7 +48,7 @@ const App = () => {
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route path="/Events" element={<Events featuredSlides={featuredSlides} upcomingSlides={upcomingSlides} />} />
-        <Route path="/MarketPlace" element={<Marketplace />} />
+        <Route path="/MarketPlace" element={<Marketplace addedNFTs={addedNFTs} />} />
         <Route path="/LoginpageNew" element={<LoginPage />} />
         <Route path="/SignUpPage" element={<SignUpPage />} />
         <Route path="/Moviedetails" element={<MovieDetails posterUrl='https://i.seadn.io/s/raw/files/22085c96c432ffe169c3c1dec3c5097d.jpg?auto=format&dpr=1&w=512'
@@ -53,7 +59,7 @@ const App = () => {
           name="Niranjan More"
           email="niranjanmore123@gmail.com"
           username="NiranjanMore10" />} />
-        <Route path='/AddNFTform' element={<AddNFTForm onSubmit={handleSubmit} />} />
+        <Route path='/AddNFTform' element={<AddNFTForm onSubmit={handleSubmit} onAddNFT={handleAddNFT} />} />
         <Route path='/EventForm' element={<EventForm />} />
         <Route path='/Collectibles' element={<Collectibles />} />
 
