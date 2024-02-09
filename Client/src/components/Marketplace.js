@@ -1,7 +1,10 @@
+
 import React, { useState, useEffect } from "react";
 import NFTItem from "./NFTItem";
 import Web3 from "web3";
 import abi from '../ABI.json';
+import Collectibles from "./Collectibles";
+
 const initialNFTs = [
   {
     imageSrc: "https://i.seadn.io/s/raw/files/21c89fb23006c3d424bbe9304b0f22c4.png?auto=format&dpr=1&w=512",
@@ -38,14 +41,15 @@ const initialNFTs = [
     title: "Zodiac #006",
     price: "0.111",
   }
-];
 
+  // Other initial NFTs...
+];
 
 const Marketplace = ({ existingNFTs, initialNFTs }) => {
   const [web3, setWeb3] = useState(null);
   const [contract, setContract] = useState(null);
   const [accounts, setAccounts] = useState([]);
-
+  const [purchasedNFTs, setPurchasedNFTs] = useState([]); // Include purchasedNFTs state
 
   useEffect(() => {
     const initWeb3 = async () => {
@@ -76,6 +80,8 @@ const Marketplace = ({ existingNFTs, initialNFTs }) => {
 
   const purchaseNFT = async (tokenId, price) => {
     try {
+      // Your purchase logic...
+      // Update purchasedNFTs state with purchased NFT
       if (contract) {
         // Helper function to clean up the price string
         const convertToWei = (amount) => {
@@ -91,9 +97,11 @@ const Marketplace = ({ existingNFTs, initialNFTs }) => {
         });
 
         console.log("NFT Purchased successfully!", result);
-      } else {
-        console.error("Contract not initialized");
       }
+      setPurchasedNFTs((prevPurchasedNFTs) => [
+        ...prevPurchasedNFTs,
+        { tokenId, price, imageSrc: initialNFTs[tokenId].imageSrc }, // Add imageSrc
+      ]);
     } catch (error) {
       console.error("Error purchasing NFT:", error);
     }
@@ -101,6 +109,10 @@ const Marketplace = ({ existingNFTs, initialNFTs }) => {
 
   return (
     <main>
+      {/* Conditionally render Collectibles component if purchasedNFTs is not empty */}
+      {purchasedNFTs.length > 0 && <Collectibles purchasedNFTs={purchasedNFTs} existingNFTs={existingNFTs} />}
+
+
       <div className="mt-20 bg-gray-900 shadow-white h-72 shadow-sm">
         <h1 className="text-center pt-24 text-white font-bold text-4xl sm:text-7xl drop-shadow-xl shadow-white">
           NFT. MARKETPLACE
@@ -108,17 +120,19 @@ const Marketplace = ({ existingNFTs, initialNFTs }) => {
       </div>
 
       <main className="place-items-center grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 ml-9 mr-9 gap-8 mt-8 mb-8">
-        {/* Check if addedNFTs is an array before mapping */}
-        {Array.isArray(existingNFTs) && existingNFTs.map((item, index) => (
+        {/* Map over existingNFTs and initialNFTs */}
+        {/* Your existing NFTs */}
+        {existingNFTs.map((item, index) => (
           <NFTItem
             key={index}
-            imageSrc={item.imageURL} // Assuming imageURL is the image source
+            imageSrc={item.imageURL}
             title={item.title}
             price={item.price}
             purchase={() => purchaseNFT(index, item.price)}
           />
         ))}
-        {Array.isArray(initialNFTs) && initialNFTs.map((item, index) => (
+        {/* Your initial NFTs */}
+        {initialNFTs.map((item, index) => (
           <NFTItem
             key={index}
             imageSrc={item.imageSrc}
