@@ -1,3 +1,5 @@
+
+
 import React, { useState, useEffect } from "react";
 import NFTItem from "./NFTItem";
 import Web3 from "web3";
@@ -98,15 +100,16 @@ const Marketplace = () => {
       console.error("Error purchasing NFT:", error);
     }
   };
+
   return (
     <main>
       <div className="mt-20 bg-gray-900 shadow-white h-72 shadow-sm">
-        <h1 className="text-center pt-24 text-white font-bold text-7xl drop-shadow-xl shadow-white">
+        <h1 className="text-center pt-24 text-white font-bold text-4xl sm:text-7xl drop-shadow-xl shadow-white">
           NFT. MARKETPLACE
         </h1>
       </div>
 
-      <main className="place-items-center grid grid-cols-5 ml-9 mr-9 gap-8 mt-24 mb-24">
+      <main className="place-items-center grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 ml-9 mr-9 gap-8 mt-8 mb-8">
         {/* Iterate over the list of NFT items */}
         {nftItems.map((item, index) => (
           <NFTItem
