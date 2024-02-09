@@ -1,17 +1,16 @@
-// AddNFTPage.js
 import React from "react";
 import AddNFTForm from "./AddNFTform";
 
-const AddNFTPage = () => {
+const AddNFTPage = ({ onAddNFT }) => {
   const handleAddNFT = (formData) => {
-
+    // Pass the form data to the parent component
+    onAddNFT(formData);
     console.log("Adding NFT:", formData);
-
   };
 
   return (
     <div className="flex justify-center  items-center h-screen">
-      <AddNFTForm onSubmit={handleAddNFT} />
+      <AddNFTForm onAddNFT={handleAddNFT} />
     </div>
   );
 };

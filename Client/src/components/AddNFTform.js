@@ -1,9 +1,7 @@
-
-
 import React, { useState } from "react";
 import PropTypes from 'prop-types';
 
-const AddNFTForm = ({ onSubmit, onAddNFT }) => {
+const AddNFTForm = ({ onAddNFT }) => {
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
   const [imageURL, setImageURL] = useState("");
@@ -32,9 +30,7 @@ const AddNFTForm = ({ onSubmit, onAddNFT }) => {
 
     setWarning("");
 
-    onSubmit({ title, price, imageURL });
-
-    // Add the new NFT to the list
+    // Call the onAddNFT function with the form data
     onAddNFT({ title, price, imageURL });
 
     setTitle("");
@@ -44,12 +40,10 @@ const AddNFTForm = ({ onSubmit, onAddNFT }) => {
   };
 
   AddNFTForm.propTypes = {
-    onSubmit: PropTypes.func.isRequired,
     onAddNFT: PropTypes.func.isRequired,
   };
 
   return (
-    // Form JSX remains the same...
     <div className="flex justify-center m-36  space-x-4">
       <section className="flex justify-center items-center ">
         <form

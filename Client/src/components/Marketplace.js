@@ -1,9 +1,8 @@
-
 import React, { useState, useEffect } from "react";
+import { useLocation } from 'react-router-dom';
 import NFTItem from "./NFTItem";
 import Web3 from "web3";
 import abi from '../ABI.json';
-import Collectibles from "./Collectibles";
 
 const initialNFTs = [
   {
@@ -41,23 +40,20 @@ const initialNFTs = [
     title: "Zodiac #006",
     price: "0.111",
   }
-
-  // Other initial NFTs...
 ];
 
-const Marketplace = ({ existingNFTs, initialNFTs }) => {
+const Marketplace = ({ existingNFTs, onPurchaseNFT }) => {
+  const location = useLocation();
   const [web3, setWeb3] = useState(null);
   const [contract, setContract] = useState(null);
   const [accounts, setAccounts] = useState([]);
-  const [purchasedNFTs, setPurchasedNFTs] = useState([]); // Include purchasedNFTs state
 
   useEffect(() => {
     const initWeb3 = async () => {
       try {
-        // Connect to MetaMask or other web3 provider
         if (window.ethereum) {
           const web3Instance = new Web3(window.ethereum);
-          await window.ethereum.enable(); // Request account access if needed
+          await window.ethereum.enable();
           setWeb3(web3Instance);
 
           const networkId = await web3Instance.eth.net.getId();
@@ -78,30 +74,24 @@ const Marketplace = ({ existingNFTs, initialNFTs }) => {
     initWeb3();
   }, []);
 
+  // Function to handle purchasing NFT
   const purchaseNFT = async (tokenId, price) => {
     try {
-      // Your purchase logic...
-      // Update purchasedNFTs state with purchased NFT
       if (contract) {
-        // Helper function to clean up the price string
         const convertToWei = (amount) => {
-          // Remove dollar sign and comma
           const cleanedAmount = amount.replace(/[$,]/g, "");
-          // Convert to wei
           return web3.utils.toWei(cleanedAmount, "ether");
         };
-        // Your purchase logic here
         const result = await contract.methods.createMarketSale(tokenId).send({
           from: accounts[0],
           value: convertToWei(price),
         });
 
         console.log("NFT Purchased successfully!", result);
+        
+        // Update purchasedNFTs in the parent component
+        onPurchaseNFT({ tokenId, price, imageSrc: initialNFTs[tokenId].imageSrc });
       }
-      setPurchasedNFTs((prevPurchasedNFTs) => [
-        ...prevPurchasedNFTs,
-        { tokenId, price, imageSrc: initialNFTs[tokenId].imageSrc }, // Add imageSrc
-      ]);
     } catch (error) {
       console.error("Error purchasing NFT:", error);
     }
@@ -109,10 +99,6 @@ const Marketplace = ({ existingNFTs, initialNFTs }) => {
 
   return (
     <main>
-      {/* Conditionally render Collectibles component if purchasedNFTs is not empty */}
-      {purchasedNFTs.length > 0 && <Collectibles purchasedNFTs={purchasedNFTs} existingNFTs={existingNFTs} />}
-
-
       <div className="mt-20 bg-gray-900 shadow-white h-72 shadow-sm">
         <h1 className="text-center pt-24 text-white font-bold text-4xl sm:text-7xl drop-shadow-xl shadow-white">
           NFT. MARKETPLACE
@@ -120,8 +106,7 @@ const Marketplace = ({ existingNFTs, initialNFTs }) => {
       </div>
 
       <main className="place-items-center grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 ml-9 mr-9 gap-8 mt-8 mb-8">
-        {/* Map over existingNFTs and initialNFTs */}
-        {/* Your existing NFTs */}
+        {/* Map over existingNFTs */}
         {existingNFTs.map((item, index) => (
           <NFTItem
             key={index}
@@ -131,7 +116,7 @@ const Marketplace = ({ existingNFTs, initialNFTs }) => {
             purchase={() => purchaseNFT(index, item.price)}
           />
         ))}
-        {/* Your initial NFTs */}
+        {/* Map over initialNFTs */}
         {initialNFTs.map((item, index) => (
           <NFTItem
             key={index}
