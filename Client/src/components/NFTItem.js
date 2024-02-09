@@ -46,7 +46,7 @@ const NFTItem = ({ imageSrc, title, price, purchase }) => {
             <p className="text-white font-bold font-mono">{price} ETH</p>
           </div>
           <button className="font-semibold text-white p-3 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-500 transition-opacity duration-300 opacity-0 group-hover:opacity-100 w-full" onClick={purchase}>
-            Book Ticket
+            Buy NFT
           </button>
         </div>
       </div>
