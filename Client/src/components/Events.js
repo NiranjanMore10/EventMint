@@ -3,11 +3,14 @@ import Sliderss from "./data";
 import "./navbar.css";
 import { useNavigate } from "react-router-dom";
 import { motion } from 'framer-motion'
+
 const EventsPage = ({ featuredSlides, upcomingSlides }) => {
     const navigate = useNavigate();
+
     const navigateToMap = () => {
         navigate('/map');
     }
+
     return (
         <main className="bg-transparent text-white min-h-screen">
             <div className="container mx-auto py-20">
@@ -16,7 +19,8 @@ const EventsPage = ({ featuredSlides, upcomingSlides }) => {
                     <div className="border-b border-white w-24 mx-auto mb-8"></div>
                 </div>
                 <div className="flex justify-center mb-12">
-                    <Sliderss slides={featuredSlides} />
+                    {/* Ensure that Sliderss receives an array of image URLs */}
+                    <Sliderss slides={featuredSlides.map(slide => slide.imageUrl)} />
                 </div>
             </div>
             <div className="bg-transparent py-20 m-2">
@@ -26,10 +30,11 @@ const EventsPage = ({ featuredSlides, upcomingSlides }) => {
                         <div className="border-b border-white w-24 mx-auto mb-8 m-4"></div>
                     </div>
                     <div className="pt-4 box-border m-auto flex flex-col sm:flex-row items-center justify-center gap-8">
+                        {/* Ensure that Sliderss receives an array of image URLs */}
+                  <Sliderss slides={upcomingSlides} />
+                  <Sliderss slides={upcomingSlides} />
                         <Sliderss slides={upcomingSlides} />
-                        <Sliderss slides={upcomingSlides} />
-                        <Sliderss slides={upcomingSlides} />
-                    </div>
+                    </div>upcomingSlides.map(slide => slide.imageUrl)}
                     <div className="flex justify-center mt-14">
                         <motion.button
                             whileHover={{ scale: 1.2 }}

@@ -21,11 +21,11 @@ import Collectibles from './components/Collectibles'
 import Map from './components/map'
 
 const App = () => {
-  const featuredSlides = [
-    'https://autowithsid.in/wp-content/uploads/2023/06/Animal-Upcoming-Ranbir-Kapoor-Movie-2023.jpg',
-    'https://bingeddata.s3.amazonaws.com/uploads/2022/05/Salaar-Poster-Teases-Prabhas-Kicking-Some-High-Octane-Action.jpg',
-    'https://i.ytimg.com/vi/Kwmid4Ud1ao/maxresdefault.jpg'
-  ];
+ const [featuredSlides, setFeaturedSlides] = useState([]);
+  const handleEventSubmit = (imageUrl) => {
+    // Add the new image URL to the existing array of featuredSlides
+    setFeaturedSlides([...featuredSlides, imageUrl]);
+  };
 
   const upcomingSlides = [
     'https://images.travelandleisureasia.com/wp-content/uploads/sites/2/2022/12/30232004/arijit-singh.jpeg',
@@ -100,7 +100,7 @@ const App = () => {
           <Route path="/map" element={<Map />} />
           <Route path="/Profile" element={<ProfilePage name="Your Name" email="your@email.com" username="yourusername" />} />
           <Route path="/AddNFTForm" element={<AddNFTForm onSubmit={handleSubmit} onAddNFT={handleAddNFT} />} />
-          <Route path="/EventForm" element={<EventForm />} />
+           <Route path="/EventForm" element={<EventForm onEventSubmit={handleEventSubmit} />} />
           <Route path='/Collectibles' element={<Collectibles purchasedNFTs={purchasedNFTs} />} />
         </Routes>
      
